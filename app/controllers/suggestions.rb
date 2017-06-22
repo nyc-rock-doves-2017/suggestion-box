@@ -1,4 +1,6 @@
-get '/' do
+get '/suggestions' do
+  p '*'*50
+  p session
 	@suggestions = Suggestion.all
 	erb :'suggestions/index'
 end
@@ -17,8 +19,7 @@ post '/suggestions' do
 end
 
 get '/suggestions/:id' do
-	p '*'*100
 	@suggestion = Suggestion.find(params[:id])
-	p @suggestion
+
 	erb :'suggestions/show'
 end
