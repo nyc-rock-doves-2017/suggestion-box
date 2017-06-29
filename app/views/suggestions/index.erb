@@ -1,7 +1,10 @@
-<h1>Suggestion Box</h1>
-<a href='/suggestions/new'>New Suggestion</a>
+<h1 id='suggestion-header'>Suggestion Box</h1>
+
+<div id='new-suggestion-wrapper'>
+  <a id='new-suggestion' href='/suggestions/new'>New Suggestion</a>
+</div>
 <ul>
 <% @suggestions.each do |suggestion| %>
-	<li><a href='/suggestions/<%= suggestion.id %>'><%= suggestion.body %> &mdash; <i><%= suggestion.author %></i></a></li>
+	<%= erb :'/suggestions/_show', locals: {suggestion: suggestion} %>
 <% end %>
 </ul>

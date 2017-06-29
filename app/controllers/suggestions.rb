@@ -1,12 +1,14 @@
 get '/suggestions' do
-  p '*'*50
-  p session
 	@suggestions = Suggestion.all
 	erb :'suggestions/index'
 end
 
 get '/suggestions/new' do
-	erb :'suggestions/new'
+	if request.xhr?
+		erb :'suggestions/_new', layout: false
+	else
+		erb :'suggestions/new'
+	end
 end
 
 
@@ -14,7 +16,11 @@ post '/suggestions' do
 	suggestion = Suggestion.new(params[:suggestion])
 
 	if suggestion.save
-		redirect '/'
+		if request.xhr?
+			erb :'suggestions/_show', layout: false, locals: {suggestion: suggestion}
+		else
+			redirect '/'
+		end
 	end
 end
 
